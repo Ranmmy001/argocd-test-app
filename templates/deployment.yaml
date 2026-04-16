@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-test-app-deployment
+  namespace: argocd-test-app-namespace
+spec:
+  selector:
+    matchLabels:
+      app: argocd-test-app-deployment
+  template:
+    metadata:
+      labels:
+        app: argocd-test-app-deployment
+    spec:
+      containers:
+      - name: argocd-test-app-deployment
+        image: nginx:alpine
+        ports:
+        - containerPort: 80

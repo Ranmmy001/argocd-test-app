@@ -1,0 +1,47 @@
+name: cicd_argocd-test-app
+
+on: 
+  push:
+    branches:
+    - main
+    - master
+env:
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u olaranmmy --password-stdin
+
+
+
+    - name: Build Docker Image  
+      run:  sudo docker build -t olaranmmy/argocdtestapp:${{ env.IMAGE_TAG }} .
+
+      
+
+
+    - name: Push Docker Image
+      run: sudo docker push olaranmmy/argocdtestapp:${{ env.IMAGE_TAG }}
+
+
+      
+    
+
+
+
+    
+
+    
+
+
+
+ 
